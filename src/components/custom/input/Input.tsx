@@ -14,7 +14,7 @@ const Input: React.FC<InputProps> = ({ control, name, rules = {}, placeholder, s
         <Controller control={control} name={name} rules={rules}
             render={({ field: { value, onChange, onBlur }, fieldState: { error } }) => (
                 <>
-                    <View style={[styles.container, { borderColor: error ? 'red' : '#e8e8e8' }]}>
+                    <View style={[styles.container, { borderColor: error ? 'red' : '#003366' }]}>
                         <TextInput style={[styles.input]} value={value} onChangeText={onChange} onBlur={onBlur} placeholder={placeholder} secureTextEntry={secureTextEntry} />
                     </View>
                     {error && (<Text style={{ color: 'red', alignSelf: 'stretch', marginLeft: 30 }}>{error.message || 'Error'}</Text>)}</>
@@ -34,7 +34,7 @@ const styles = StyleSheet.create({
         marginVertical: 5
     },
     input: {
-
+        
     }
 })
 

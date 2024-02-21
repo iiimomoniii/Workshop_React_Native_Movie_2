@@ -10,7 +10,7 @@ import React, { useState, useEffect } from 'react';
 import MovieProps from '../../models/class/movie';
 import Button from '../../components/custom/button/Button'
 
-const Home = ({ navigation }: { navigation: any }) => {
+const Moviecard = ({ navigation }: { navigation: any }) => {
   const [MoviesObjLists, setMovies] = useState([])
 
   useEffect(() => {
@@ -77,7 +77,9 @@ const Home = ({ navigation }: { navigation: any }) => {
               </View>
             </View>
           {/* </Pressable> */}
-          <Button text='Detail' onPress={()=> onDetailPressed(m.id)} page="HomePage" type="detail"/>
+          <Button text='Favorite' onPress={()=> onDetailPressed(m.id)} page="MoviecardPage" type="favorite"/>
+          <Button text='Detail' onPress={()=> onDetailPressed(m.id)} page="MoviecardPage" type="detail"/>
+
         </View>
         
       ))}
@@ -86,7 +88,7 @@ const Home = ({ navigation }: { navigation: any }) => {
 }
 const styles = StyleSheet.create({
   root: {
-    backgroundColor: '#000000',
+    backgroundColor: '#003366',
     backfaceVisibility: 'hidden',
     paddingBottom:10
   },
@@ -96,7 +98,8 @@ const styles = StyleSheet.create({
     resizeMode: 'contain',
   },
   textBox: {
-    margin: 5,
+    marginLeft: 20,
+    marginRight:90
   },
   title: {
     marginLeft: 20,
@@ -116,4 +119,4 @@ const styles = StyleSheet.create({
     color: '#ffffff'
   }
 });
-export default Home
+export default Moviecard

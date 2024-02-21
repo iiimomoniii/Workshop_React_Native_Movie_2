@@ -43,7 +43,7 @@ const Register = ({ navigation }: {navigation: any}) => {
 
 const styles = StyleSheet.create({
     root: {
-        backgroundColor: '#000000',
+        backgroundColor: '#003366',
         flex:1,
         alignItems: 'center',
         marginTop: 20
@@ -57,7 +57,9 @@ const styles = StyleSheet.create({
     policy: {
         fontSize: 15,
         color: '#ffffff',
-        marginTop: 250
+        marginTop: 250,
+        marginLeft:20,
+        marginRight : 20
     },
     policyLink: {
         fontSize: 15,

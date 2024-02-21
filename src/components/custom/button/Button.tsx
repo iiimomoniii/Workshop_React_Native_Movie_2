@@ -25,9 +25,7 @@ const styles: {[key:string]:any} = StyleSheet.create({
         borderRadius:5
     },
     Container_SignInPage_forgot: {
-        width: '90%',
-        padding:15,
-        marginVertical:5,
+        marginTop:10,
         alignItems:'flex-end',
         borderRadius:5
     },
@@ -101,7 +99,15 @@ const styles: {[key:string]:any} = StyleSheet.create({
         alignItems:'center',
         borderRadius:5
     },
-    Container_HomePage_detail: {
+    Container_MoviecardPage_detail: {
+        width: '90%',
+        padding:15,
+        marginVertical:5,
+        alignItems:'center',
+        borderRadius:5,
+        margin:20
+    },
+    Container_MoviecardPage_favorite: {
         width: '90%',
         padding:15,
         marginVertical:5,
@@ -110,43 +116,45 @@ const styles: {[key:string]:any} = StyleSheet.create({
         margin:20
     },
     Button_SignInPage_signIn : {
-        backgroundColor: '#f44336',
+        backgroundColor: '#003366',
     },
     Button_SignInPage_forgot : {
-        backgroundColor: '#000000',
     },
     Button_SignInPage_register : {
-        backgroundColor: '#000000',
+        backgroundColor: '#FFCC01CC',
     },
     Button_RegisterPage_register : {
-        backgroundColor: '#f44336',
+        backgroundColor: '#FFCC01CC',
     },
-    Button_RegisterPage_confirm : {
-        backgroundColor: '#f44336'
+    Button_RegisterPage_back : {
+        backgroundColor: '#FFCC01CC '
     },
     Button_ConfirmPage_confirm : {
-        backgroundColor: '#f44336'
+        backgroundColor: '#FFCC01CC'
     },
     Button_ConfirmPage_back : {
-        backgroundColor: '#000000',
+        backgroundColor: '#003366',
     },
     Button_ConfirmPage_resend : {
-        backgroundColor: '#f1c232',
+        backgroundColor: '#ffffff',
     },
     Button_ResetPage_reset : {
         backgroundColor: '#ff9a00',
     },
     Button_ResetPage_back : {
-        backgroundColor: '#000000',
+        backgroundColor: '#003366',
     },
     Button_ForgotPage_confirm_email : {
-        backgroundColor : '#0096FF'
+        backgroundColor : '#FFCC01CC'
     }, 
     Button_ForgotPage_back : {
-        backgroundColor: '#000000',
+        backgroundColor: '#003366',
     }, 
-    Button_HomePage_detail : {
-        backgroundColor: '#ffffff',
+    Button_MoviecardPage_detail : {
+        backgroundColor: '#ffffff'
+    }, 
+    Button_MoviecardPage_favorite : {
+        backgroundColor: '#FFCC01CC'
     },
     text: {
         fontWeight:'bold',
@@ -157,12 +165,12 @@ const styles: {[key:string]:any} = StyleSheet.create({
         fontWeight: 'bold'
     },
     Text_SignInPage_forgot : {
-        color: '#ffffff',
+        color: '#003366',
         fontWeight: 'bold',
         textDecorationLine: 'underline',
     },
     Text_SignInPage_register : {
-        color: '#ffffff',
+        color: '#003366',
         fontWeight: 'bold',
         textDecorationLine: 'underline',
     },
@@ -178,6 +186,10 @@ const styles: {[key:string]:any} = StyleSheet.create({
     Text_ConfirmPage_confirm : {
         color: '#ffffff',
         fontWeight: 'bold'
+    },
+    Text_ConfirmPage_resend : {
+        color: '#003366',
+        fontWeight: 'bold',
     },
     Text_ConfirmPage_back : {
         color: '#ffffff',
@@ -198,8 +210,12 @@ const styles: {[key:string]:any} = StyleSheet.create({
         fontWeight: 'bold',
         textDecorationLine: 'underline',
     },
-    Text_HomePage_detail : {
-        color: '#000000',
+    Text_MoviecardPage_detail : {
+        color: '#003366',
+        fontWeight: 'bold'
+    },
+    Text_MoviecardPage_favorite : {
+        color: '#ffffff',
         fontWeight: 'bold'
     }
 })

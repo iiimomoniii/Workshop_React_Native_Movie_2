@@ -14,7 +14,7 @@ const Confirm = ({ navigation }: { navigation: any }) => {
         console.warn("resend code")
     }
     const onBackPressed = () => {
-        navigation.navigate('Home');
+        navigation.navigate('Register');
     }
 
     return (
@@ -31,7 +31,7 @@ const Confirm = ({ navigation }: { navigation: any }) => {
 const styles = StyleSheet.create({
     root: {
         flex: 1,
-        backgroundColor: '#000000',
+        backgroundColor: '#003366',
         alignItems: 'center',
         marginTop: 20
     },

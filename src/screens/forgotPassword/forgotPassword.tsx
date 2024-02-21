@@ -13,7 +13,7 @@ const Confirm = ({ navigation }: {navigation: any}) => {
       console.warn("confirm")
   }
   const onBackPressed = () => {
-    navigation.navigate('Home');
+    navigation.navigate('SignIn');
   }
 
   return (
@@ -28,7 +28,7 @@ const Confirm = ({ navigation }: {navigation: any}) => {
 
 const styles = StyleSheet.create({
   root: {
-      backgroundColor: '#000000',
+      backgroundColor: '#ffffff',
       flex:1,
       alignItems: 'center',
       marginTop: 20
