@@ -14,6 +14,7 @@ import ResetPassword from '../screens/resetPassword'
 import AntdesignIcon from 'react-native-vector-icons/AntDesign';
 import Fontisto from 'react-native-vector-icons/Fontisto';
 import AsyncStorage from '@react-native-async-storage/async-storage';
+import MovieCardDetail from '../screens/moviecard_detail';
 
 
 const Stack = createNativeStackNavigator();
@@ -45,6 +46,7 @@ const AuthStack = () => (
         <Stack.Screen name="Confirm" component={Confirm}></Stack.Screen>
         <Stack.Screen name="ResetPassword" component={ResetPassword}></Stack.Screen>
         <Stack.Screen name="Moviecard" component={Moviecard}></Stack.Screen>
+        <Stack.Screen name="MoviecardDetail" component={MovieCardDetail}></Stack.Screen>
         <Stack.Screen name="SignOut" component={SignOut}></Stack.Screen>
     </Stack.Navigator>
 );
@@ -61,6 +63,8 @@ const AppTabs = () => (
               : 'ios-information-circle-outline';
           } else if (route.name === 'Settings') {
             iconName = focused ? 'ios-list' : 'ios-list-outline';
+          } else if (route.name === 'MoviecardDetail') {
+            return false;
           }
 
           // You can return any component that you like here!
@@ -81,22 +85,27 @@ const AppTabs = () => (
                 ),
             }} 
         />
-        {/* <Tab.Screen name="Moviecard" component={Moviecard}
-            options={{
-                tabBarLabel: 'BookOutlined',
-                tabBarIcon: ({ color, size }) => (
-                    <AntdesignIcon name="book" color={color} size={size} />
-                ),
-            }} 
-        />*/
+
+        <Tab.Screen name="MoviecardDetail" component={MovieCardDetail} 
+         options={{
+            tabBarButton: () => null 
+        }} 
+        />
+
+        <Tab.Screen name="SignIn" component={SignIn} 
+         options={{
+            tabBarButton: () => null 
+        }} 
+        />
+
         <Tab.Screen name="SignOut" component={SignOut} 
              options={{
-                tabBarLabel: 'LogoutOutlined',
+                tabBarLabel: 'SignOut',
                 tabBarIcon: ({ color, size }) => (
                     <AntdesignIcon name="logout" color={color} size={size} />
                 ),
             }} 
-        />}
+        />
         
     </Tab.Navigator>
 );

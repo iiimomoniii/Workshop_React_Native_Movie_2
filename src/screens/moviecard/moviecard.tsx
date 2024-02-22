@@ -1,122 +1,149 @@
-import {
-  View,
-  Text,
-  ScrollView,
-  Image,
-  Pressable,
-  StyleSheet,
-} from 'react-native';
 import React, { useState, useEffect } from 'react';
+import {
+ View,
+ Text,
+ ScrollView,
+ Image,
+ StyleSheet,
+} from 'react-native';
 import MovieProps from '../../models/class/movie';
-import Button from '../../components/custom/button/Button'
+import Button from '../../components/custom/button/Button';
 
-const Moviecard = ({ navigation }: { navigation: any }) => {
-  const [MoviesObjLists, setMovies] = useState([])
 
-  useEffect(() => {
-    fetch('https://www.majorcineplex.com/apis/get_movie_avaiable')
-      .then(res => res.json())
-      .then((result) => {
-        setMovies(result.movies)
-      })
-  }, [])
+const MovieCard = ({ navigation }: { navigation: any }) => {
+ const [movies, setMovies] = useState<MovieProps[]>([]);
+ const [favoriteMovies, setFavoriteMovies] = useState<MovieProps[]>([]);
 
-  const onDetailPressed = (id: number) => {
-    navigation.navigate('Detail',{id: id})
-  }
 
-  return (
-    <ScrollView >
-      {MoviesObjLists.map((m: MovieProps) => (
-        <View style={styles.root} key={m.id}>
-          {/* <Pressable onPress={() => pressDetail(m.id)}> */}
-            <Image
-              style={styles.coverImage}
-              source={{
-                uri: m.poster_url,
-              }}
-              resizeMode="contain"
-              resizeMethod="resize"
-            />
-            <View style={styles.textBox}>
-              <Text style={styles.title}>
-                {m.title_en}{' '}({' '}{m.title_th}{' '})
+ useEffect(() => {
+   fetch('https://www.majorcineplex.com/apis/get_movie_avaiable')
+     .then(res => res.json())
+     .then((result) => {
+       setMovies(result.movies);
+     });
+ }, []);
 
-              </Text>
-              <View style={{ flexDirection: 'row'}}>
-                <Text style={styles.titleDetails}>
-                  Director :
-                </Text>
-                <Text style={styles.details}>
-                  {m.director}
-                </Text>
-              </View>
-              <View style={{ flexDirection: 'row'}}>
-                <Text style={styles.titleDetails}>
-                  Actor      :
-                </Text>
-                <Text style={styles.details}>
-                  {m.actor}
-                </Text>
-              </View>
-              <View style={{ flexDirection: 'row'}}>
-                <Text style={styles.titleDetails}>
-                  Genre     :
-                </Text>
-                <Text style={styles.details}>
-                  {m.genre}
-                </Text>
-              </View>
-              <View style={{ flexDirection: 'row'}}>
-                <Text style={styles.titleDetails}>
-                  Duration :
-                </Text>
-                <Text style={styles.details}>
-                  {m.duration} minute
-                </Text>
-              </View>
-            </View>
-          {/* </Pressable> */}
-          <Button text='Favorite' onPress={()=> onDetailPressed(m.id)} page="MoviecardPage" type="favorite"/>
-          <Button text='Detail' onPress={()=> onDetailPressed(m.id)} page="MoviecardPage" type="detail"/>
 
-        </View>
-        
-      ))}
-    </ScrollView>
-  )
-}
+ const onDetailPressed = (id: number) => {
+  navigation.navigate('MoviecardDetail', { id: id });
+};
+
+
+ const toggleFavorite = (id: number) => {
+   setMovies(prevMovies =>
+     prevMovies.map(movie =>
+       movie.id === id ? { ...movie, favorite: !movie.favorite } : movie
+     )
+   );
+ };
+
+
+ useEffect(() => {
+   setFavoriteMovies(movies.filter(movie => movie.favorite));
+ }, [movies]);
+
+
+ return (
+   <ScrollView>
+     <View>
+       <Text style={styles.sectionTitle}>All Movies</Text>
+       {movies.map(m => (
+         <MovieItem
+           key={m.id}
+           movie={m}
+           onDetailPressed={onDetailPressed}
+           toggleFavorite={toggleFavorite}
+         />
+       ))}
+     </View>
+     <View>
+       <Text style={styles.sectionTitle}>Favorite Movies</Text>
+       {favoriteMovies.map(m => (
+         <MovieItem
+           key={m.id}
+           movie={m}
+           onDetailPressed={onDetailPressed}
+           toggleFavorite={toggleFavorite}
+         />
+       ))}
+     </View>
+   </ScrollView>
+  
+ );
+};
+
+
+const MovieItem = ({
+ movie,
+ onDetailPressed,
+ toggleFavorite,
+}: {
+ movie: MovieProps;
+ onDetailPressed: (id: number) => void;
+ toggleFavorite: (id: number) => void;
+}) => {
+ return (
+   <View style={styles.root} key={movie.id}>
+     <Image
+       style={styles.coverImage}
+       source={{
+         uri: movie.poster_url,
+       }}
+       resizeMode="contain"
+       resizeMethod="resize"
+     />
+     <View style={styles.textBox}>
+       <Text style={styles.title}>
+         {movie.title_en} ({movie.title_th})
+       </Text>
+       {/* Other movie details */}
+     </View>
+     <Button
+       text={movie.favorite ? 'Remove Favorite' : 'Add Favorite'}
+       onPress={() => toggleFavorite(movie.id)}
+       page="MoviecardPage"
+       type="favorite"
+     />
+     <Button
+       text="Detail"
+       onPress={() => onDetailPressed(movie.id)}
+       page="MoviecardPage"
+       type="detail"
+     />
+   </View>
+ );
+};
+
+
 const styles = StyleSheet.create({
-  root: {
-    backgroundColor: '#003366',
-    backfaceVisibility: 'hidden',
-    paddingBottom:10
-  },
-  coverImage: {
-    height: 500,
-    justifyContent: 'space-around',    //  <-- you can use "center", "flex-start",
-    resizeMode: 'contain',
-  },
-  textBox: {
-    marginLeft: 20,
-    marginRight:90
-  },
-  title: {
-    marginLeft: 20,
-    fontSize: 20,
-    color: '#ff9a00',
-    fontWeight: 'bold'
-  },
-  titleDetails: {
-    fontWeight: 'bold',
-    fontSize: 15,
-    marginLeft: 20,
-    color: '#ff9a00'
-  },
-  details: {
-    fontSize: 15,
-    marginLeft: 10,
-    color: '#ffffff'
-  }
+ root: {
+   backgroundColor: '#003366',
+   paddingBottom: 10,
+ },
+ coverImage: {
+   height: 500,
+   justifyContent: 'space-around',
+   resizeMode: 'contain',
+ },
+ textBox: {
+   marginLeft: 20,
+   marginRight: 90,
+ },
+ title: {
+   marginLeft: 20,
+   fontSize: 20,
+   color: '#ff9a00',
+   fontWeight: 'bold',
+ },
+ sectionTitle: {
+   fontSize: 24,
+   fontWeight: 'bold',
+   textAlign: 'center',
+   marginTop: 20,
+   marginBottom: 10,
+ },
 });
-export default Moviecard
+
+
+export default MovieCard;
+
