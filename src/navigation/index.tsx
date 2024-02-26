@@ -110,12 +110,11 @@ const Navigation = () => {
 
   return (
     <NavigationContainer>
-      {/* {isAuthenticated ? (
+      {isAuthenticated ? (
         <AppTabs />
       ) : (
         <AuthStack />
-      )} */}
-         <AppTabs />
+      )}
     </NavigationContainer>
   );
 };
