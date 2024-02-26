@@ -12,12 +12,26 @@ const SignOut = ({ navigation }: {navigation: any}) => {
 
     const onSignOutPressed = async (data:any) => {
         try {
-          await AsyncStorage.removeItem('token')
-          navigation.navigate('SignIn')
+          // navigation.navigate('SignIn')
+          handleLogout();
         } catch ( err) {
           console.log(err);
         }
     }
+    const [isAuthenticated, setIsAuthenticated] = useState(false);
+
+
+    const handleLogout = async () => {
+      try {
+        // Clear authentication token from AsyncStorage
+        await AsyncStorage.removeItem('token');
+        setIsAuthenticated(false); // Update isAuthenticated state to false
+        console.log('Sign Out isAuthenticated',isAuthenticated);
+        navigation.navigate('SignIn');
+      } catch (error) {
+        console.error('Error clearing authentication token:', error);
+      }
+    };  
 
   return (
     <View style={styles.root}>

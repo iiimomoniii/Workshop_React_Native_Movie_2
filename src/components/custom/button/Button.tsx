@@ -115,6 +115,14 @@ const styles: {[key:string]:any} = StyleSheet.create({
         borderRadius:5,
         margin:20
     },
+    Container_CardDetailPage_back: {
+        width: '90%',
+        padding:15,
+        marginVertical:5,
+        alignItems:'center',
+        borderRadius:5,
+        margin:20
+    },
     Button_SignInPage_signIn : {
         backgroundColor: '#003366',
     },
