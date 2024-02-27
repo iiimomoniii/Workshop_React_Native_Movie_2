@@ -9,29 +9,36 @@ import AsyncStorage from '@react-native-async-storage/async-storage';
 const SignOut = ({ navigation }: {navigation: any}) => {
 
     const {control, handleSubmit, formState: {errors}} = useForm();
-
-    const onSignOutPressed = async (data:any) => {
-        try {
-          // navigation.navigate('SignIn')
-          handleLogout();
-        } catch ( err) {
-          console.log(err);
-        }
-    }
     const [isAuthenticated, setIsAuthenticated] = useState(false);
-
-
-    const handleLogout = async () => {
+    const onSignOutPressed = async (data:any) => {
       try {
         // Clear authentication token from AsyncStorage
         await AsyncStorage.removeItem('token');
-        setIsAuthenticated(false); // Update isAuthenticated state to false
-        console.log('Sign Out isAuthenticated',isAuthenticated);
+        console.log('token',AsyncStorage.removeItem('token'));
+        console.log('Sign Out isAuthenticated SignOut',isAuthenticated);
         navigation.navigate('SignIn');
       } catch (error) {
         console.error('Error clearing authentication token:', error);
       }
-    };  
+    }
+
+    useEffect(() => {
+      const checkAuthentication = async () => {
+          try {
+              const token = await AsyncStorage.getItem('token');
+              if (token) {
+                  setIsAuthenticated(true);
+                  console.log('Sign Out isAuthenticated useEffect', isAuthenticated);
+              } else {
+                setIsAuthenticated(false);
+                console.log('Sign Out isAuthenticated useEffect', isAuthenticated);
+              }
+          } catch (error) {
+              console.error('Error checking authentication token:', error);
+          }
+      };
+      checkAuthentication();
+  }, [isAuthenticated]);
 
   return (
     <View style={styles.root}>

@@ -1,9 +1,13 @@
-import { View, Text, StyleSheet } from 'react-native';
+import { View, Text, StyleSheet, Alert } from 'react-native';
 import React, { useEffect, useState } from 'react';
 import { NavigationContainer } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import AsyncStorage from '@react-native-async-storage/async-storage';
+import { useNavigation } from '@react-navigation/native';
+
+
+
 
 import Moviecard from '../screens/moviecard';
 import SignIn from '../screens/signin';
@@ -81,7 +85,6 @@ const AppTabs = () => (
       listeners={({ navigation }) => ({
         tabPress: (e) => {
           e.preventDefault();
-          // handleLogout(); // Call handleLogout when SignOut tab is pressed
           navigation.navigate('SignOut');
         }
       })}
@@ -99,14 +102,15 @@ const Navigation = () => {
         if (token) {
           setIsAuthenticated(true);
         } else {
-          setIsAuthenticated(false); // Ensure to set isAuthenticated to false if no token is found
+          setIsAuthenticated(false); 
         }
       } catch (error) {
         console.error('Error checking authentication token:', error);
       }
     };
     checkAuthentication();
-  }, []);
+  }, [isAuthenticated]);
+
 
   return (
     <NavigationContainer>

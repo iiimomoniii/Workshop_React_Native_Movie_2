@@ -5,57 +5,16 @@ import Button from '../../components/custom/button/Button';
 import { useForm } from 'react-hook-form';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 
-const Logo = require("../../assets/img/major_logo_1.png");
+import Logo from "../../assets/img/major_logo_1.png";
 
 const SignIn = ({ navigation }: { navigation: any }) => {
     const { control, handleSubmit, formState: { errors } } = useForm();
     const [isAuthenticated, setIsAuthenticated] = useState(false);
-
-    // useEffect(() => {
-    //     const checkAuthentication = async () => {
-    //         try {
-    //             const token = await AsyncStorage.getItem('token');
-    //             if (token) {
-    //                 setIsAuthenticated(true);
-    //             }
-    //         } catch (error) {
-    //             console.error('Error checking authentication token:', error);
-    //         }
-    //     };
-    //     checkAuthentication();
-    // }, []);
-
-    // const handleSignIn = async (data: any) => {
-    //     try {
-    //         await AsyncStorage.setItem('token', '12345');
-    //         setIsAuthenticated(true); // Update isAuthenticated after setting the token
-    //         console.log('Sign In isAuthenticated', isAuthenticated);
-    //         navigation.navigate('Moviecard'); // Navigate after setting isAuthenticated
-    //     } catch (error) {
-    //         console.error('Error setting authentication token:', error);
-    //     }
-    // };
-
-    useEffect(() => {
-        const checkAuthentication = async () => {
-            try {
-                const token = await AsyncStorage.getItem('token');
-                if (token) {
-                    setIsAuthenticated(true);
-                    console.log('Sign In isAuthenticated', isAuthenticated);
-                }
-            } catch (error) {
-                console.error('Error checking authentication token:', error);
-            }
-        };
-        checkAuthentication();
-    }, []);
     
     const handleSignIn = async (data: any) => {
         try {
             await AsyncStorage.setItem('token', '12345');
-            setIsAuthenticated(true);
-            console.log('Sign In isAuthenticated', true);
+            console.log('Sign In handleSignIn isAuthenticated', true);
             navigation.navigate('Moviecard');
         } catch (error) {
             console.error('Error setting authentication token:', error);
@@ -69,6 +28,21 @@ const SignIn = ({ navigation }: { navigation: any }) => {
     const onRegisterPressed = () => {
         navigation.navigate('Register');
     };
+
+    useEffect(() => {
+        const checkAuthentication = async () => {
+            try {
+                const token = await AsyncStorage.getItem('token');
+                if (token) {
+                    setIsAuthenticated(true);
+                    console.log('Sign In useEffect isAuthenticated', isAuthenticated);
+                }
+            } catch (error) {
+                console.error('Error checking authentication token:', error);
+            }
+        };
+        checkAuthentication();
+    }, [isAuthenticated]);
 
     return (
         <View style={styles.root}>
